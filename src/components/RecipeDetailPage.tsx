@@ -1,12 +1,12 @@
 import { useParams, useNavigate } from 'react-router-dom';
-import { useRecipes } from '../hooks/useFirestore';
+import { useFilteredData } from '../hooks/useFilteredData';
 import AppHeader from './AppHeader';
 import RecipeDetail from './RecipeDetail';
 
 function RecipeDetailPage() {
   const { slug } = useParams<{ slug: string }>();
   const navigate = useNavigate();
-  const { recipes, loading, error } = useRecipes();
+  const { recipes, loading, error } = useFilteredData();
 
   const handleBack = () => {
     navigate('/recipes');

@@ -1,11 +1,5 @@
 import { useState, useEffect } from "react";
-import {
-  collection,
-  query,
-  where,
-  orderBy,
-  onSnapshot,
-} from "firebase/firestore";
+import { collection, query, where, onSnapshot } from "firebase/firestore";
 import type { QuerySnapshot, DocumentData } from "firebase/firestore";
 import { initializeFirebase } from "../lib/firebase";
 import type { Recipe, Ingredient } from "../types";
@@ -14,6 +8,7 @@ export function useRecipes() {
   const [recipes, setRecipes] = useState<Recipe[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [groupIds, setGroupIds] = useState<string[]>([]);
 
   useEffect(() => {
     let unsubscribe: (() => void) | null = null;
@@ -37,15 +32,25 @@ export function useRecipes() {
                 ...data,
               } as Recipe;
             });
-            
+
             // Sort by updatedAt desc on client-side
             recipesData.sort((a, b) => {
               const aTime = a.updatedAt?.seconds || 0;
               const bTime = b.updatedAt?.seconds || 0;
               return bTime - aTime;
             });
-            
+
+            // Extract unique group IDs
+            const uniqueGroupIds = Array.from(
+              new Set(
+                recipesData
+                  .map((recipe) => recipe.createdByGroupId)
+                  .filter(Boolean)
+              )
+            ).sort();
+
             setRecipes(recipesData);
+            setGroupIds(uniqueGroupIds);
             setLoading(false);
           },
           (err) => {
@@ -70,13 +75,14 @@ export function useRecipes() {
     };
   }, []);
 
-  return { recipes, loading, error };
+  return { recipes, loading, error, groupIds };
 }
 
 export function useIngredients() {
   const [ingredients, setIngredients] = useState<Ingredient[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [groupIds, setGroupIds] = useState<string[]>([]);
 
   useEffect(() => {
     let unsubscribe: (() => void) | null = null;
@@ -100,7 +106,17 @@ export function useIngredients() {
                 ...data,
               } as Ingredient;
             });
+            // Extract unique group IDs
+            const uniqueGroupIds = Array.from(
+              new Set(
+                ingredientsData
+                  .map((ingredient) => ingredient.createdByGroupId)
+                  .filter(Boolean)
+              )
+            ).sort();
+
             setIngredients(ingredientsData);
+            setGroupIds(uniqueGroupIds);
             setLoading(false);
           },
           (err) => {
@@ -125,5 +141,5 @@ export function useIngredients() {
     };
   }, []);
 
-  return { ingredients, loading, error };
+  return { ingredients, loading, error, groupIds };
 }

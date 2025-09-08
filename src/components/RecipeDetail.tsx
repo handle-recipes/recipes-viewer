@@ -28,16 +28,6 @@ const RecipeDetail: React.FC<RecipeDetailProps> = ({ recipe }) => {
 
   return (
     <div className="recipe-detail">
-      {recipe.imageUrl && (
-        <div className="recipe-hero-image">
-          <img
-            src={recipe.imageUrl}
-            alt={recipe.name || 'Recipe'}
-            style={{ width: '100%', height: '400px', objectFit: 'cover' }}
-          />
-        </div>
-      )}
-
       <div className="recipe-header">
         <h1>{recipe.name}</h1>
         <p className="recipe-description">{recipe.description}</p>

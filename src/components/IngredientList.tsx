@@ -1,5 +1,5 @@
 import React from 'react';
-import { useIngredients } from '../hooks/useFirestore';
+import { useFilteredData } from '../hooks/useFilteredData';
 import type { Ingredient } from '../types';
 
 const IngredientCard: React.FC<{ ingredient: Ingredient }> = ({ ingredient }) => {
@@ -30,7 +30,7 @@ const IngredientCard: React.FC<{ ingredient: Ingredient }> = ({ ingredient }) =>
 };
 
 const IngredientList: React.FC = () => {
-  const { ingredients, loading, error } = useIngredients();
+  const { ingredients, loading, error } = useFilteredData();
 
   if (loading) {
     return <div className="loading">Loading ingredients...</div>;

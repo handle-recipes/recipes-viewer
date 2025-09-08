@@ -1,5 +1,5 @@
 import React from 'react';
-import { useRecipes } from '../hooks/useFirestore';
+import { useFilteredData } from '../hooks/useFilteredData';
 import RecipeCard from './RecipeCard';
 import type { Recipe } from '../types';
 
@@ -8,7 +8,7 @@ interface RecipeListProps {
 }
 
 const RecipeList: React.FC<RecipeListProps> = ({ onRecipeSelect }) => {
-  const { recipes, loading, error } = useRecipes();
+  const { recipes, loading, error } = useFilteredData();
 
   if (loading) {
     return <div className="loading">Loading recipes...</div>;

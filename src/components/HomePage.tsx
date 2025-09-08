@@ -25,7 +25,7 @@ function HomePage() {
   return (
     <>
       <AppHeader />
-      
+
       <div className="tab-content">
         {activeTab === 'recipes' ? (
           <RecipeList onRecipeSelect={handleRecipeSelect} />
