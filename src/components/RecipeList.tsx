@@ -1,8 +1,13 @@
 import React from 'react';
 import { useRecipes } from '../hooks/useFirestore';
 import RecipeCard from './RecipeCard';
+import type { Recipe } from '../types';
 
-const RecipeList: React.FC = () => {
+interface RecipeListProps {
+  onRecipeSelect: (recipe: Recipe) => void;
+}
+
+const RecipeList: React.FC<RecipeListProps> = ({ onRecipeSelect }) => {
   const { recipes, loading, error } = useRecipes();
 
   if (loading) {
@@ -22,7 +27,7 @@ const RecipeList: React.FC = () => {
       <h1>Recipes</h1>
       <div className="recipe-grid">
         {recipes.map((recipe) => (
-          <RecipeCard key={recipe.id} recipe={recipe} />
+          <RecipeCard key={recipe.id} recipe={recipe} onRecipeSelect={onRecipeSelect} />
         ))}
       </div>
     </div>

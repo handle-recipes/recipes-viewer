@@ -47,9 +47,9 @@ const RecipeDetail: React.FC<RecipeDetailProps> = ({ recipe }) => {
         </div>
       </div>
 
-      <div className="recipe-content">
+      <div className="recipe-layout">
         {recipe.ingredients && recipe.ingredients.length > 0 && (
-          <div className="recipe-ingredients">
+          <div className="recipe-ingredients-sidebar">
             <h2>Ingredients</h2>
             <ul>
               {recipe.ingredients.map(renderIngredient)}
@@ -58,25 +58,28 @@ const RecipeDetail: React.FC<RecipeDetailProps> = ({ recipe }) => {
         )}
 
         {recipe.steps && recipe.steps.length > 0 && (
-          <div className="recipe-instructions">
+          <div className="recipe-instructions-main">
             <h2>Instructions</h2>
-            <ol>
+            <div className="steps-container">
               {recipe.steps.map((step, index) => (
-                <li key={index} className="instruction-step">
-                  {step.text}
-                  {step.imageUrl && (
-                    <img
-                      src={step.imageUrl}
-                      alt={`Step ${index + 1}`}
-                      style={{ maxWidth: '100%', height: 'auto', marginTop: '10px' }}
-                    />
-                  )}
-                  {step.equipment && step.equipment.length > 0 && (
-                    <p className="equipment">Equipment: {step.equipment.join(', ')}</p>
-                  )}
-                </li>
+                <div key={index} className="instruction-step-box">
+                  <div className="step-number">{index + 1}</div>
+                  <div className="step-content">
+                    <p className="step-text">{step.text}</p>
+                    {step.imageUrl && (
+                      <img
+                        src={step.imageUrl}
+                        alt={`Step ${index + 1}`}
+                        className="step-image"
+                      />
+                    )}
+                    {step.equipment && step.equipment.length > 0 && (
+                      <p className="equipment">Equipment: {step.equipment.join(', ')}</p>
+                    )}
+                  </div>
+                </div>
               ))}
-            </ol>
+            </div>
           </div>
         )}
       </div>

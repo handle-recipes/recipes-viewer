@@ -4,13 +4,14 @@ import { Recipe } from '../types';
 
 interface RecipeCardProps {
   recipe: Recipe;
+  onRecipeSelect: (recipe: Recipe) => void;
 }
 
-const RecipeCard: React.FC<RecipeCardProps> = ({ recipe }) => {
+const RecipeCard: React.FC<RecipeCardProps> = ({ recipe, onRecipeSelect }) => {
   const slug = recipe.slug || slugify(recipe.name, { lower: true, strict: true });
 
   return (
-    <div className="recipe-card">
+    <div className="recipe-card" onClick={() => onRecipeSelect(recipe)}>
       {recipe.imageUrl && (
         <div className="recipe-image">
           <img 
@@ -26,14 +27,6 @@ const RecipeCard: React.FC<RecipeCardProps> = ({ recipe }) => {
           <p className="recipe-description">{recipe.description}</p>
         )}
         <p className="recipe-servings">Servings: {recipe.servings}</p>
-        <button 
-          onClick={() => {
-            console.log('Navigate to recipe detail:', slug, recipe.id);
-          }}
-          className="view-recipe-btn"
-        >
-          View Recipe
-        </button>
       </div>
     </div>
   );
