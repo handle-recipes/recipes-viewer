@@ -9,6 +9,41 @@
   padding: 20px;
 }
 
+.tab-navigation {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 2rem;
+  border-bottom: 1px solid #ddd;
+}
+
+.tab-button {
+  background: none;
+  border: none;
+  padding: 12px 24px;
+  margin: 0 4px;
+  cursor: pointer;
+  font-size: 1rem;
+  color: #666;
+  border-bottom: 3px solid transparent;
+  transition: all 0.2s;
+}
+
+.tab-button:hover {
+  color: #007bff;
+  background-color: #f8f9fa;
+}
+
+.tab-button.active {
+  color: #007bff;
+  border-bottom-color: #007bff;
+  font-weight: 600;
+}
+
+.tab-content {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
 .loading, .error, .empty {
   text-align: center;
   padding: 2rem;
@@ -149,4 +184,74 @@
 .instruction-step {
   margin: 15px 0;
   padding-left: 10px;
+}
+
+.ingredient-list {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.ingredient-list h1 {
+  text-align: center;
+  margin-bottom: 2rem;
+  color: #333;
+}
+
+.ingredient-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+  padding: 0 20px;
+}
+
+.ingredient-card {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 20px;
+  background: white;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.ingredient-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+.ingredient-card h3 {
+  margin: 0 0 10px 0;
+  color: #333;
+  font-size: 1.2rem;
+  text-transform: capitalize;
+}
+
+.ingredient-card .aliases {
+  margin: 8px 0;
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.ingredient-card .categories {
+  margin: 10px 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.category-tag {
+  background: #e3f2fd;
+  color: #1565c0;
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+.ingredient-card .allergens {
+  margin: 10px 0 0 0;
+  padding: 8px;
+  background: #fff3e0;
+  border-left: 4px solid #ff9800;
+  font-size: 0.9rem;
+  color: #ef6c00;
 }

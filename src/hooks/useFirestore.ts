@@ -1,7 +1,14 @@
-import { useState, useEffect } from 'react';
-import { collection, query, where, orderBy, onSnapshot, QuerySnapshot, DocumentData } from 'firebase/firestore';
-import { initializeFirebase } from '../lib/firebase';
-import { Recipe, Ingredient } from '../types';
+import { useState, useEffect } from "react";
+import {
+  collection,
+  query,
+  where,
+  orderBy,
+  onSnapshot,
+} from "firebase/firestore";
+import type { QuerySnapshot, DocumentData } from "firebase/firestore";
+import { initializeFirebase } from "../lib/firebase";
+import type { Recipe, Ingredient } from "../types";
 
 export function useRecipes() {
   const [recipes, setRecipes] = useState<Recipe[]>([]);
@@ -14,32 +21,42 @@ export function useRecipes() {
     async function setupListener() {
       try {
         const { db } = await initializeFirebase();
-        
+
         const q = query(
-          collection(db, 'recipes'),
-          where('isArchived', '==', false),
-          orderBy('updatedAt', 'desc')
+          collection(db, "recipes"),
+          where("isArchived", "!=", true)
         );
 
         unsubscribe = onSnapshot(
           q,
           (snapshot: QuerySnapshot<DocumentData>) => {
-            const recipesData = snapshot.docs.map(doc => ({
-              id: doc.id,
-              ...doc.data()
-            }));
+            const recipesData = snapshot.docs.map((doc) => {
+              const data = doc.data();
+              return {
+                id: doc.id,
+                ...data,
+              } as Recipe;
+            });
+            
+            // Sort by updatedAt desc on client-side
+            recipesData.sort((a, b) => {
+              const aTime = a.updatedAt?.seconds || 0;
+              const bTime = b.updatedAt?.seconds || 0;
+              return bTime - aTime;
+            });
+            
             setRecipes(recipesData);
             setLoading(false);
           },
           (err) => {
-            console.error('Error fetching recipes:', err);
+            console.error("Error fetching recipes:", err);
             setError(err.message);
             setLoading(false);
           }
         );
       } catch (err) {
-        console.error('Failed to setup recipes listener:', err);
-        setError(err instanceof Error ? err.message : 'Unknown error');
+        console.error("Failed to setup recipes listener:", err);
+        setError(err instanceof Error ? err.message : "Unknown error");
         setLoading(false);
       }
     }
@@ -67,31 +84,34 @@ export function useIngredients() {
     async function setupListener() {
       try {
         const { db } = await initializeFirebase();
-        
+
         const q = query(
-          collection(db, 'ingredients'),
-          where('isArchived', '==', false)
+          collection(db, "ingredients"),
+          where("isArchived", "!=", true)
         );
 
         unsubscribe = onSnapshot(
           q,
           (snapshot: QuerySnapshot<DocumentData>) => {
-            const ingredientsData = snapshot.docs.map(doc => ({
-              id: doc.id,
-              ...doc.data()
-            }));
+            const ingredientsData = snapshot.docs.map((doc) => {
+              const data = doc.data();
+              return {
+                id: doc.id,
+                ...data,
+              } as Ingredient;
+            });
             setIngredients(ingredientsData);
             setLoading(false);
           },
           (err) => {
-            console.error('Error fetching ingredients:', err);
+            console.error("Error fetching ingredients:", err);
             setError(err.message);
             setLoading(false);
           }
         );
       } catch (err) {
-        console.error('Failed to setup ingredients listener:', err);
-        setError(err instanceof Error ? err.message : 'Unknown error');
+        console.error("Failed to setup ingredients listener:", err);
+        setError(err instanceof Error ? err.message : "Unknown error");
         setLoading(false);
       }
     }

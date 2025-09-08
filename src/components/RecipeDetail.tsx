@@ -8,17 +8,17 @@ interface RecipeDetailProps {
 const RecipeDetail: React.FC<RecipeDetailProps> = ({ recipe }) => {
   const renderIngredient = (ingredient: RecipeIngredient, index: number) => {
     let displayText = `${ingredient.ingredientId}`;
-    
+
     if (ingredient.unit === 'free_text' && ingredient.quantityText) {
       displayText = `${ingredient.quantityText} ${ingredient.ingredientId}`;
     } else if (ingredient.quantity) {
       displayText = `${ingredient.quantity} ${ingredient.unit} ${ingredient.ingredientId}`;
     }
-    
+
     if (ingredient.note) {
       displayText += ` (${ingredient.note})`;
     }
-    
+
     return (
       <li key={index} className="ingredient-item">
         {displayText}
@@ -30,18 +30,18 @@ const RecipeDetail: React.FC<RecipeDetailProps> = ({ recipe }) => {
     <div className="recipe-detail">
       {recipe.imageUrl && (
         <div className="recipe-hero-image">
-          <img 
-            src={recipe.imageUrl} 
-            alt={recipe.name || recipe.title || 'Recipe'} 
+          <img
+            src={recipe.imageUrl}
+            alt={recipe.name || 'Recipe'}
             style={{ width: '100%', height: '400px', objectFit: 'cover' }}
           />
         </div>
       )}
-      
+
       <div className="recipe-header">
         <h1>{recipe.name}</h1>
         <p className="recipe-description">{recipe.description}</p>
-        
+
         <div className="recipe-meta">
           <span className="recipe-servings">Servings: {recipe.servings}</span>
         </div>
@@ -65,9 +65,9 @@ const RecipeDetail: React.FC<RecipeDetailProps> = ({ recipe }) => {
                 <li key={index} className="instruction-step">
                   {step.text}
                   {step.imageUrl && (
-                    <img 
-                      src={step.imageUrl} 
-                      alt={`Step ${index + 1}`} 
+                    <img
+                      src={step.imageUrl}
+                      alt={`Step ${index + 1}`}
                       style={{ maxWidth: '100%', height: 'auto', marginTop: '10px' }}
                     />
                   )}
