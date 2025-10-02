@@ -35,9 +35,9 @@ export function useRecipes() {
 
             // Sort by updatedAt desc on client-side
             recipesData.sort((a, b) => {
-              const aTime = a.updatedAt?.seconds || 0;
-              const bTime = b.updatedAt?.seconds || 0;
-              return bTime - aTime;
+              const aTime = a.updatedAt || "";
+              const bTime = b.updatedAt || "";
+              return bTime.localeCompare(aTime);
             });
 
             // Extract unique group IDs

@@ -5,15 +5,38 @@
 // ----------------------
 // Common / utility types
 // ----------------------
-export type FirestoreTimestamp = { seconds: number; nanoseconds: number };
 
 // Injected into MCP servers via ENV and forwarded in requests
 export type GroupId = string;
 
-export const UNITS = ["g", "kg", "ml", "l", "piece", "free_text"] as const;
+export const UNITS = [
+  // Metric weight
+  "g",
+  "kg",
+  // Metric volume
+  "ml",
+  "l",
+  // Imperial/US weight
+  "oz",
+  "lb",
+  // Imperial/US volume
+  "tsp",
+  "tbsp",
+  "fl oz",
+  "cup",
+  "pint",
+  "quart",
+  "gallon",
+  // Count
+  "piece",
+  // Free form
+  "free_text",
+] as const;
 /**
  * Units:
- * - Metric only + "piece"
+ * - Metric: g, kg, ml, l
+ * - Imperial/US: oz, lb, tsp, tbsp, fl oz, cup, pint, quart, gallon
+ * - Count: piece
  * - "free_text" = quantity is expressed in text (quantityText) and unit
  *   is visually omitted.
  */
@@ -39,8 +62,8 @@ export interface Ingredient {
   allergens: string[];
 
   /** Provenance / audit */
-  createdAt: FirestoreTimestamp;
-  updatedAt: FirestoreTimestamp;
+  createdAt: string;
+  updatedAt: string;
   createdByGroupId: GroupId;
   updatedByGroupId: GroupId;
 
@@ -119,8 +142,8 @@ export interface Recipe {
   sourceUrl?: string;
 
   /** Provenance / audit */
-  createdAt: FirestoreTimestamp;
-  updatedAt: FirestoreTimestamp;
+  createdAt: string;
+  updatedAt: string;
   createdByGroupId: GroupId;
   updatedByGroupId: GroupId;
 
