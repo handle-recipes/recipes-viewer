@@ -1,4 +1,4 @@
-import { useRecipes, useIngredients } from "./useFirestore";
+import { useRecipes, useIngredients, useSuggestions } from "./useFirestore";
 import { useGroupFilter } from "./useGroupFilter";
 
 // Custom hook that combines recipes and ingredients data with client-side filtering
@@ -15,11 +15,17 @@ export function useFilteredData() {
     error: ingredientsError,
     groupIds: ingredientGroupIds,
   } = useIngredients();
+  const {
+    suggestions,
+    loading: suggestionsLoading,
+    error: suggestionsError,
+    groupIds: suggestionGroupIds,
+  } = useSuggestions();
   const { groupId } = useGroupFilter();
 
-  // Combine and deduplicate group IDs from both sources
+  // Combine and deduplicate group IDs from all sources
   const allGroupIds = Array.from(
-    new Set([...recipeGroupIds, ...ingredientGroupIds])
+    new Set([...recipeGroupIds, ...ingredientGroupIds, ...suggestionGroupIds])
   ).sort();
 
   // Filter data based on selected group ID
@@ -33,11 +39,18 @@ export function useFilteredData() {
       )
     : ingredients;
 
+  const filteredSuggestions = groupId
+    ? suggestions.filter(
+        (suggestion) => suggestion.submittedByGroupId === groupId
+      )
+    : suggestions;
+
   return {
     recipes: filteredRecipes,
     ingredients: filteredIngredients,
+    suggestions: filteredSuggestions,
     allGroupIds,
-    loading: recipesLoading || ingredientsLoading,
-    error: recipesError || ingredientsError,
+    loading: recipesLoading || ingredientsLoading || suggestionsLoading,
+    error: recipesError || ingredientsError || suggestionsError,
   };
 }

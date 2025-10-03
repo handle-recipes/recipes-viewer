@@ -34,6 +34,34 @@ const RecipeDetail: React.FC<RecipeDetailProps> = ({ recipe }) => {
 
         <div className="recipe-meta">
           <span className="recipe-servings">Servings: {recipe.servings}</span>
+          {recipe.tags && recipe.tags.length > 0 && (
+            <div className="recipe-tags">
+              {recipe.tags.map((tag) => (
+                <span key={tag} className="tag">
+                  {tag}
+                </span>
+              ))}
+            </div>
+          )}
+          {recipe.categories && recipe.categories.length > 0 && (
+            <div className="recipe-categories">
+              {recipe.categories.map((category) => (
+                <span key={category} className="category">
+                  {category}
+                </span>
+              ))}
+            </div>
+          )}
+          {recipe.sourceUrl && (
+            <p className="source-url">
+              Source: <a href={recipe.sourceUrl} target="_blank" rel="noopener noreferrer">{recipe.sourceUrl}</a>
+            </p>
+          )}
+          {recipe.variantOf && (
+            <p className="variant-info">
+              <em>Variant of: {recipe.variantOf}</em>
+            </p>
+          )}
         </div>
       </div>
 

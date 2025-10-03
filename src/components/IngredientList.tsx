@@ -25,6 +25,20 @@ const IngredientCard: React.FC<{ ingredient: Ingredient }> = ({ ingredient }) =>
           <strong>Allergens:</strong> {ingredient.allergens.join(', ')}
         </div>
       )}
+      {ingredient.nutrition && (
+        <div className="nutrition">
+          <strong>Nutrition (per 100g/ml):</strong>
+          {ingredient.nutrition.calories && <span> {ingredient.nutrition.calories} kcal</span>}
+          {ingredient.nutrition.protein && <span>, Protein: {ingredient.nutrition.protein}g</span>}
+          {ingredient.nutrition.carbohydrates && <span>, Carbs: {ingredient.nutrition.carbohydrates}g</span>}
+          {ingredient.nutrition.fat && <span>, Fat: {ingredient.nutrition.fat}g</span>}
+        </div>
+      )}
+      {ingredient.variantOf && (
+        <p className="variant-info">
+          <em>Variant of: {ingredient.variantOf}</em>
+        </p>
+      )}
     </div>
   );
 };

@@ -8,17 +8,18 @@ type HeaderProps = {
   onBack?: () => void;
 };
 
-type TabType = 'recipes' | 'ingredients';
+type TabType = 'recipes' | 'ingredients' | 'suggestions';
 
 function AppHeader({ showBackButton = false, backLabel = "Back to Recipes", onBack }: HeaderProps) {
   const location = useLocation();
   const navigate = useNavigate();
   const { groupId, setGroupId } = useGroupFilter();
-  const { recipes, ingredients, allGroupIds } = useFilteredData();
+  const { recipes, ingredients, suggestions, allGroupIds } = useFilteredData();
 
   // Determine active tab from URL
   const getActiveTab = (): TabType => {
     if (location.pathname === '/ingredients') return 'ingredients';
+    if (location.pathname === '/suggestions') return 'suggestions';
     return 'recipes'; // default to recipes for '/' and '/recipes'
   };
 
@@ -61,6 +62,12 @@ function AppHeader({ showBackButton = false, backLabel = "Back to Recipes", onBa
                 onClick={() => handleTabChange('ingredients')}
               >
                 Ingredients ({ingredients.length})
+              </button>
+              <button
+                className={`tab-button ${activeTab === 'suggestions' ? 'active' : ''}`}
+                onClick={() => handleTabChange('suggestions')}
+              >
+                Suggestions ({suggestions.length})
               </button>
             </div>
           )}

@@ -2,8 +2,9 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import AppHeader from './AppHeader';
 import RecipeList from './RecipeList';
 import IngredientList from './IngredientList';
+import SuggestionList from './SuggestionList';
 
-type TabType = 'recipes' | 'ingredients';
+type TabType = 'recipes' | 'ingredients' | 'suggestions';
 
 function HomePage() {
   const location = useLocation();
@@ -12,6 +13,7 @@ function HomePage() {
   // Determine active tab from URL
   const getActiveTab = (): TabType => {
     if (location.pathname === '/ingredients') return 'ingredients';
+    if (location.pathname === '/suggestions') return 'suggestions';
     return 'recipes'; // default to recipes for '/' and '/recipes'
   };
 
@@ -29,8 +31,10 @@ function HomePage() {
       <div className="tab-content">
         {activeTab === 'recipes' ? (
           <RecipeList onRecipeSelect={handleRecipeSelect} />
-        ) : (
+        ) : activeTab === 'ingredients' ? (
           <IngredientList />
+        ) : (
+          <SuggestionList />
         )}
       </div>
     </>
