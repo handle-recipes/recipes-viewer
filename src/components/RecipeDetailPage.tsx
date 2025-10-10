@@ -6,7 +6,7 @@ import RecipeDetail from './RecipeDetail';
 function RecipeDetailPage() {
   const { slug } = useParams<{ slug: string }>();
   const navigate = useNavigate();
-  const { recipes, loading, error } = useFilteredData();
+  const { recipes, ingredients, loading, error } = useFilteredData();
 
   const handleBack = () => {
     navigate('/recipes');
@@ -45,7 +45,7 @@ function RecipeDetailPage() {
   return (
     <>
       <AppHeader showBackButton onBack={handleBack} />
-      <RecipeDetail recipe={recipe} />
+      <RecipeDetail recipe={recipe} ingredients={ingredients} />
     </>
   );
 }
