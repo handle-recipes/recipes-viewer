@@ -21,28 +21,32 @@ const RecipeDetail: React.FC<RecipeDetailProps> = ({ recipe, ingredients }) => {
   }, [recipe, ingredientsMap]);
 
   const renderIngredient = (ingredient: RecipeIngredient, index: number) => {
-    let displayText = `${ingredient.ingredientId}`;
-
-    if (ingredient.unit === 'free_text' && ingredient.quantityText) {
-      displayText = `${ingredient.quantityText} ${ingredient.ingredientId}`;
-    } else if (ingredient.quantity) {
-      displayText = `${ingredient.quantity} ${ingredient.unit} ${ingredient.ingredientId}`;
-    }
-
-    if (ingredient.note) {
-      displayText += ` (${ingredient.note})`;
-    }
+    // Get the ingredient name from the ingredients map, fallback to ID
+    const ingredientDoc = ingredientsMap.get(ingredient.ingredientId);
+    const ingredientName = ingredientDoc?.name || ingredient.ingredientId;
 
     return (
       <li key={index} className="ingredient-item">
-        {displayText}
+        {ingredient.unit === 'free_text' && ingredient.quantityText ? (
+          <>
+            <span className="ingredient-quantity">{ingredient.quantityText}</span>{' '}
+            <span className="ingredient-name">{ingredientName}</span>
+          </>
+        ) : ingredient.quantity ? (
+          <>
+            <span className="ingredient-quantity">{ingredient.quantity} {ingredient.unit}</span>{' '}
+            <span className="ingredient-name">{ingredientName}</span>
+          </>
+        ) : (
+          <span className="ingredient-name">{ingredientName}</span>
+        )}
+        {ingredient.note && <span className="ingredient-note"> ({ingredient.note})</span>}
       </li>
     );
   };
 
   const renderNutrition = (totals: NutritionalInfo, perServing: boolean, servings: number) => {
     const divisor = perServing ? servings : 1;
-    const label = perServing ? 'per serving' : 'total';
 
     return (
       <div className="nutrition-values">
