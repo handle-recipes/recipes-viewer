@@ -1,4 +1,4 @@
-import { Recipe, Ingredient, RecipeIngredient, NutritionalInfo, Unit } from '../types';
+import { Recipe, Ingredient, NutritionalInfo, Unit } from '../types';
 
 // Standard weight conversions to grams
 const WEIGHT_TO_GRAMS: Record<string, number> = {
