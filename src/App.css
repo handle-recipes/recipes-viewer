@@ -62,10 +62,19 @@ button:focus-visible {
 
 .app-header {
   border-bottom: 1px solid #ddd;
-  padding: 20px 0;
+  padding: 12px 0;
   position: sticky;
   top: 0;
   z-index: 100;
+  background-color: #f8f9fa;
+  transition: all 0.25s ease;
+  box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+}
+
+.app-header.scrolled {
+  padding: 6px 0;
+  box-shadow: 0 2px 4px -2px rgba(0, 0, 0, 0.15);
+  border-bottom: 1px solid #bbb;
 }
 
 .app-header .tab-navigation {
@@ -88,12 +97,31 @@ button:focus-visible {
   grid-template-columns: 1fr auto 1fr;
   align-items: center;
   gap: 20px;
+  transition: all 0.25s ease;
+}
+
+.app-header.scrolled .header-content {
+  gap: 12px;
+  grid-template-columns: auto;
+  justify-content: center;
+}
+
+/* Keep back button left-aligned when scrolled */
+.app-header.scrolled.has-back-button .header-content {
+  grid-template-columns: auto 1fr;
+  justify-content: flex-start;
+}
+
+.app-header.has-back-button .header-center,
+.app-header.has-back-button .header-right {
+  display: none;
 }
 
 .header-left {
   display: flex;
   justify-content: flex-start;
   align-items: center;
+  transition: all 0.25s ease;
 }
 
 .header-center {
@@ -106,6 +134,11 @@ button:focus-visible {
   display: flex;
   justify-content: flex-end;
   align-items: center;
+  transition: all 0.25s ease;
+}
+
+.app-header.scrolled .header-right {
+  display: none;
 }
 
 .group-filter {
@@ -120,6 +153,11 @@ button:focus-visible {
   font-weight: 500;
   color: #666;
   white-space: nowrap;
+  transition: all 0.3s ease;
+}
+
+.app-header.scrolled .filter-label {
+  font-size: 0.85rem;
 }
 
 .filter-dropdown-group {
@@ -133,15 +171,22 @@ button:focus-visible {
   border: 1px solid #ddd;
   border-radius: 6px;
   font-size: 0.9rem;
-  width: 200px;
+  width: auto;
+  min-width: 150px;
   background: white;
   cursor: pointer;
-  transition: border-color 0.2s, box-shadow 0.2s;
+  transition: all 0.3s ease;
   appearance: none;
   background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6,9 12,15 18,9'%3e%3c/polyline%3e%3c/svg%3e");
   background-repeat: no-repeat;
-  background-position: right 8px center;
-  background-size: 16px;
+  background-position: right 12px center;
+  background-size: 12px;
+  padding-right: 36px;
+}
+
+.app-header.scrolled .filter-dropdown {
+  padding: 6px 10px;
+  font-size: 0.85rem;
   padding-right: 32px;
 }
 
@@ -156,19 +201,198 @@ button:focus-visible {
 }
 
 @media (max-width: 768px) {
-  .header-content {
-    flex-direction: column;
-    gap: 15px;
-    align-items: stretch;
+  #root {
+    padding: 1rem;
   }
-  
-  .group-filter {
+
+  .header-content {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .app-header.has-back-button .header-content,
+  .app-header.scrolled.has-back-button .header-content {
+    grid-template-columns: 1fr;
     justify-content: center;
   }
-  
+
+  .header-left,
+  .header-center,
+  .header-right {
+    justify-content: center;
+  }
+
+  .group-filter {
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
   .filter-dropdown {
     width: 100%;
     max-width: 300px;
+  }
+
+  .tab-button {
+    padding: 10px 16px;
+    font-size: 0.9rem;
+  }
+
+  .tab-content {
+    padding: 1.5rem 10px;
+  }
+
+  .recipe-grid,
+  .ingredient-grid,
+  .suggestion-grid {
+    grid-template-columns: 1fr;
+    padding: 0 10px;
+  }
+
+  .recipe-hero-image img {
+    height: 250px;
+  }
+
+  .recipe-header {
+    margin: 20px 0 30px 0;
+  }
+
+  .recipe-header h1 {
+    font-size: 1.75rem;
+  }
+
+  .recipe-meta {
+    gap: 12px;
+  }
+
+  .recipe-tags .tag,
+  .recipe-categories .category {
+    padding: 5px 10px;
+    font-size: 0.8rem;
+  }
+
+  .recipe-detail {
+    padding: 1rem 10px;
+  }
+
+  .recipe-ingredients-sidebar {
+    padding: 15px;
+  }
+
+  .recipe-ingredients-sidebar h2 {
+    font-size: 1.1rem;
+  }
+
+  .ingredient-item {
+    padding: 10px 12px;
+    font-size: 0.9rem;
+  }
+
+  .nutrition-header h3 {
+    font-size: 1rem;
+  }
+
+  .nutrition-toggle {
+    padding: 6px 12px;
+    font-size: 0.8rem;
+  }
+
+  .recipe-instructions-main h2 {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+  }
+
+  .instruction-step-box {
+    padding: 16px;
+    gap: 12px;
+  }
+
+  .step-number {
+    width: 32px;
+    height: 32px;
+    font-size: 0.95rem;
+  }
+
+  .step-text {
+    font-size: 0.95rem;
+  }
+
+  .back-button {
+    padding: 10px 16px;
+    font-size: 0.9rem;
+  }
+
+  .ingredient-card {
+    padding: 16px;
+  }
+
+  .ingredient-card h3 {
+    font-size: 1.1rem;
+  }
+
+  .suggestion-card {
+    padding: 16px;
+  }
+
+  .suggestion-header h3 {
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  #root {
+    padding: 0.5rem;
+  }
+
+  .app-header {
+    padding: 15px 0;
+  }
+
+  .header-content {
+    padding: 0 10px;
+  }
+
+  .tab-button {
+    padding: 8px 12px;
+    font-size: 0.85rem;
+    margin: 0 2px;
+  }
+
+  .recipe-hero-image img {
+    height: 200px;
+    border-radius: 0;
+  }
+
+  .recipe-header h1 {
+    font-size: 1.5rem;
+  }
+
+  .recipe-list h1,
+  .ingredient-list h1,
+  .suggestion-list h1 {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .instruction-step-box {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 14px;
+    gap: 10px;
+  }
+
+  .step-number {
+    width: 28px;
+    height: 28px;
+    font-size: 0.85rem;
+  }
+
+  .filter-label {
+    font-size: 0.85rem;
+  }
+
+  .filter-dropdown {
+    font-size: 0.85rem;
+    padding: 6px 10px;
   }
 }
 
@@ -180,13 +404,19 @@ button:focus-visible {
 .tab-button {
   background: none;
   border: none;
-  padding: 12px 24px;
+  padding: 10px 20px;
   margin: 0 4px;
   cursor: pointer;
-  font-size: 1rem;
+  font-size: 0.95rem;
   color: #666;
   border-bottom: 3px solid transparent;
-  transition: all 0.2s;
+  transition: all 0.25s ease;
+}
+
+.app-header.scrolled .tab-button {
+  padding: 6px 14px;
+  font-size: 0.85rem;
+  border-bottom-width: 2px;
 }
 
 .tab-button:hover {
@@ -377,10 +607,10 @@ button:focus-visible {
   margin-top: 30px;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 900px) {
   .recipe-layout {
     grid-template-columns: 1fr;
-    gap: 30px;
+    gap: 24px;
   }
 }
 
@@ -401,6 +631,13 @@ button:focus-visible {
   height: fit-content;
   position: sticky;
   top: 20px;
+}
+
+@media (max-width: 900px) {
+  .recipe-ingredients-sidebar {
+    position: static;
+    top: auto;
+  }
 }
 
 .recipe-ingredients-sidebar h2 {
@@ -855,19 +1092,24 @@ button:focus-visible {
   all: unset;
   background: #3498db;
   border: none;
-  padding: 12px 20px;
+  padding: 10px 16px;
   border-radius: 6px;
   cursor: pointer;
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   color: white;
-  transition: all 0.2s;
+  transition: all 0.25s ease;
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
   font-weight: 500;
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   box-shadow: 0 2px 4px rgba(52, 152, 219, 0.2);
   text-decoration: none;
+}
+
+.app-header.scrolled .back-button {
+  padding: 8px 14px;
+  font-size: 0.85rem;
 }
 
 .back-button:hover {

@@ -1,6 +1,7 @@
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useFilteredData } from '../hooks/useFilteredData';
 import { useGroupFilter } from '../hooks/useGroupFilter';
+import { useEffect, useState } from 'react';
 
 type HeaderProps = {
   showBackButton?: boolean;
@@ -15,6 +16,23 @@ function AppHeader({ showBackButton = false, backLabel = "Back to Recipes", onBa
   const navigate = useNavigate();
   const { groupId, setGroupId } = useGroupFilter();
   const { recipes, ingredients, suggestions, allGroupIds } = useFilteredData();
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollY = window.scrollY;
+      setIsScrolled(prev => {
+        // Shrink immediately when scrolling down
+        if (scrollY > 0 && !prev) return true;
+        // Only expand when fully at top
+        if (scrollY === 0 && prev) return false;
+        return prev;
+      });
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   // Determine active tab from URL
   const getActiveTab = (): TabType => {
@@ -37,8 +55,14 @@ function AppHeader({ showBackButton = false, backLabel = "Back to Recipes", onBa
     }
   };
 
+  const headerClasses = [
+    'app-header',
+    isScrolled ? 'scrolled' : '',
+    showBackButton ? 'has-back-button' : ''
+  ].filter(Boolean).join(' ');
+
   return (
-    <nav className="app-header">
+    <nav className={headerClasses}>
       <div className="header-content">
         <div className="header-left">
           {showBackButton && (
