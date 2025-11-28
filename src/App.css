@@ -61,20 +61,33 @@ button:focus-visible {
 }
 
 .app-header {
-  border-bottom: 1px solid #ddd;
-  padding: 12px 0;
   position: sticky;
   top: 0;
   z-index: 100;
+  padding: 12px 0;
   background-color: #f8f9fa;
-  transition: all 0.25s ease;
-  box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+  transition: padding 0.25s ease;
+  border: none;
+  box-shadow: none;
+}
+
+.app-header::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 1px;
+  background-color: #ddd;
+  transition: background-color 0.25s ease;
 }
 
 .app-header.scrolled {
   padding: 6px 0;
-  box-shadow: 0 2px 4px -2px rgba(0, 0, 0, 0.15);
-  border-bottom: 1px solid #bbb;
+}
+
+.app-header.scrolled::after {
+  background-color: #bbb;
 }
 
 .app-header .tab-navigation {
