@@ -134,12 +134,12 @@ const RecipeDetail: React.FC<RecipeDetailProps> = ({ recipe, ingredients }) => {
             {nutritionSummary && (
               <div className="nutrition-summary">
                 <div className="nutrition-header">
-                  <h3>Nutrition</h3>
+                  <h3>{showPerServing ? 'Nutrition per serving' : 'Total nutrition'}</h3>
                   <button
                     className="nutrition-toggle"
                     onClick={() => setShowPerServing(!showPerServing)}
                   >
-                    {showPerServing ? 'Total' : 'Per Serving'}
+                    {showPerServing ? 'Show total' : 'Show per serving'}
                   </button>
                 </div>
                 <div className="nutrition-note">
