@@ -28,10 +28,10 @@ const IngredientCard: React.FC<{ ingredient: Ingredient }> = ({ ingredient }) =>
       {ingredient.nutrition && (
         <div className="nutrition">
           <strong>Nutrition (per 100g/ml):</strong>
-          {ingredient.nutrition.calories && <span> {ingredient.nutrition.calories} kcal</span>}
-          {ingredient.nutrition.protein && <span>, Protein: {ingredient.nutrition.protein}g</span>}
-          {ingredient.nutrition.carbohydrates && <span>, Carbs: {ingredient.nutrition.carbohydrates}g</span>}
-          {ingredient.nutrition.fat && <span>, Fat: {ingredient.nutrition.fat}g</span>}
+          {ingredient.nutrition.calories != null && <span> {ingredient.nutrition.calories} kcal</span>}
+          {ingredient.nutrition.protein != null && <span>, Protein: {ingredient.nutrition.protein}g</span>}
+          {ingredient.nutrition.carbohydrates != null && <span>, Carbs: {ingredient.nutrition.carbohydrates}g</span>}
+          {ingredient.nutrition.fat != null && <span>, Fat: {ingredient.nutrition.fat}g</span>}
         </div>
       )}
       {ingredient.variantOf && (
