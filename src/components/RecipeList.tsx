@@ -2,6 +2,7 @@ import React from 'react';
 import { useFilteredData } from '../hooks/useFilteredData';
 import RecipeCard from './RecipeCard';
 import type { Recipe } from '../types';
+import styles from './RecipeList.module.css';
 
 interface RecipeListProps {
   onRecipeSelect: (recipe: Recipe) => void;
@@ -23,9 +24,9 @@ const RecipeList: React.FC<RecipeListProps> = ({ onRecipeSelect }) => {
   }
 
   return (
-    <div className="recipe-list">
+    <div className={styles['recipe-list']}>
       <h1>Recipes</h1>
-      <div className="recipe-grid">
+      <div className={styles['recipe-grid']}>
         {recipes.map((recipe) => (
           <RecipeCard key={recipe.id} recipe={recipe} onRecipeSelect={onRecipeSelect} />
         ))}

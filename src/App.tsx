@@ -2,7 +2,7 @@ import { Routes, Route } from 'react-router-dom';
 import HomePage from './components/HomePage';
 import RecipeDetailPage from './components/RecipeDetailPage';
 import { GroupFilterProvider } from './components/GroupFilterProvider';
-import './App.css';
+import './global.css';
 
 function App() {
   return (

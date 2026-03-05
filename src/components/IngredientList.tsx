@@ -1,32 +1,33 @@
 import React from 'react';
 import { useFilteredData } from '../hooks/useFilteredData';
 import type { Ingredient } from '../types';
+import styles from './IngredientList.module.css';
 
 const IngredientCard: React.FC<{ ingredient: Ingredient }> = ({ ingredient }) => {
   return (
-    <div className="ingredient-card">
+    <div className={styles['ingredient-card']}>
       <h3>{ingredient.name}</h3>
       {ingredient.aliases && ingredient.aliases.length > 0 && (
-        <p className="aliases">
+        <p className={styles.aliases}>
           <strong>Aliases:</strong> {ingredient.aliases.join(', ')}
         </p>
       )}
       {ingredient.categories && ingredient.categories.length > 0 && (
-        <div className="categories">
+        <div className={styles.categories}>
           {ingredient.categories.map((category) => (
-            <span key={category} className="category-tag">
+            <span key={category} className={styles['category-tag']}>
               {category}
             </span>
           ))}
         </div>
       )}
       {ingredient.allergens && ingredient.allergens.length > 0 && (
-        <div className="allergens">
+        <div className={styles.allergens}>
           <strong>Allergens:</strong> {ingredient.allergens.join(', ')}
         </div>
       )}
       {ingredient.nutrition && (
-        <div className="nutrition">
+        <div className={styles.nutrition}>
           <strong>Nutrition (per 100g/ml):</strong>
           {ingredient.nutrition.calories != null && <span> {ingredient.nutrition.calories} kcal</span>}
           {ingredient.nutrition.protein != null && <span>, Protein: {ingredient.nutrition.protein}g</span>}
@@ -35,7 +36,7 @@ const IngredientCard: React.FC<{ ingredient: Ingredient }> = ({ ingredient }) =>
         </div>
       )}
       {ingredient.variantOf && (
-        <p className="variant-info">
+        <p className={styles['variant-info']}>
           <em>Variant of: {ingredient.variantOf}</em>
         </p>
       )}
@@ -59,9 +60,9 @@ const IngredientList: React.FC = () => {
   }
 
   return (
-    <div className="ingredient-list">
+    <div className={styles['ingredient-list']}>
       <h1>Ingredients</h1>
-      <div className="ingredient-grid">
+      <div className={styles['ingredient-grid']}>
         {ingredients.map((ingredient) => (
           <IngredientCard key={ingredient.id} ingredient={ingredient} />
         ))}

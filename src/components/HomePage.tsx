@@ -3,6 +3,7 @@ import AppHeader from './AppHeader';
 import RecipeList from './RecipeList';
 import IngredientList from './IngredientList';
 import SuggestionList from './SuggestionList';
+import styles from './HomePage.module.css';
 
 type TabType = 'recipes' | 'ingredients' | 'suggestions';
 
@@ -28,7 +29,7 @@ function HomePage() {
     <>
       <AppHeader />
 
-      <div className="tab-content">
+      <div className={styles['tab-content']}>
         {activeTab === 'recipes' ? (
           <RecipeList onRecipeSelect={handleRecipeSelect} />
         ) : activeTab === 'ingredients' ? (

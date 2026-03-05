@@ -1,6 +1,7 @@
 import React from 'react';
 import { useFilteredData } from '../hooks/useFilteredData';
 import type { Suggestion, SuggestionCategory, SuggestionPriority, SuggestionStatus } from '../types';
+import styles from './SuggestionList.module.css';
 
 const SuggestionCard: React.FC<{ suggestion: Suggestion }> = ({ suggestion }) => {
   const getCategoryColor = (category: SuggestionCategory) => {
@@ -34,35 +35,35 @@ const SuggestionCard: React.FC<{ suggestion: Suggestion }> = ({ suggestion }) =>
   };
 
   return (
-    <div className="suggestion-card">
-      <div className="suggestion-header">
+    <div className={styles['suggestion-card']}>
+      <div className={styles['suggestion-header']}>
         <h3>{suggestion.title}</h3>
-        <div className="suggestion-badges">
+        <div className={styles['suggestion-badges']}>
           <span
-            className="suggestion-badge"
+            className={styles['suggestion-badge']}
             style={{ backgroundColor: getCategoryColor(suggestion.category) }}
           >
             {suggestion.category}
           </span>
           <span
-            className="suggestion-badge"
+            className={styles['suggestion-badge']}
             style={{ backgroundColor: getPriorityColor(suggestion.priority) }}
           >
             {suggestion.priority}
           </span>
           <span
-            className="suggestion-badge"
+            className={styles['suggestion-badge']}
             style={{ backgroundColor: getStatusColor(suggestion.status) }}
           >
             {suggestion.status}
           </span>
         </div>
       </div>
-      <p className="suggestion-description">{suggestion.description}</p>
-      <div className="suggestion-footer">
-        <span className="suggestion-votes">👍 {suggestion.votes}</span>
+      <p className={styles['suggestion-description']}>{suggestion.description}</p>
+      <div className={styles['suggestion-footer']}>
+        <span className={styles['suggestion-votes']}>👍 {suggestion.votes}</span>
         {suggestion.relatedRecipeId && (
-          <span className="suggestion-related">
+          <span className={styles['suggestion-related']}>
             Related Recipe: {suggestion.relatedRecipeId}
           </span>
         )}
@@ -87,9 +88,9 @@ const SuggestionList: React.FC = () => {
   }
 
   return (
-    <div className="suggestion-list">
+    <div className={styles['suggestion-list']}>
       <h1>Suggestions</h1>
-      <div className="suggestion-grid">
+      <div className={styles['suggestion-grid']}>
         {suggestions.map((suggestion) => (
           <SuggestionCard key={suggestion.id} suggestion={suggestion} />
         ))}

@@ -1,0 +1,11 @@
+.tab-content {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 2rem 20px;
+}
+
+@media (max-width: 768px) {
+  .tab-content {
+    padding: 1.5rem 10px;
+  }
+}

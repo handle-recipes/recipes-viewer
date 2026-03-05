@@ -1,6 +1,7 @@
 import React, { useState, useMemo } from 'react';
 import { Recipe, RecipeIngredient, Ingredient, NutritionalInfo } from '../types';
 import { calculateRecipeNutrition } from '../utils/nutritionCalculator';
+import styles from './RecipeDetail.module.css';
 
 interface RecipeDetailProps {
   recipe: Recipe;
@@ -26,21 +27,21 @@ const RecipeDetail: React.FC<RecipeDetailProps> = ({ recipe, ingredients }) => {
     const ingredientName = ingredientDoc?.name || ingredient.ingredientId;
 
     return (
-      <li key={index} className="ingredient-item">
+      <li key={index} className={styles['ingredient-item']}>
         {ingredient.unit === 'free_text' && ingredient.quantityText ? (
           <>
-            <span className="ingredient-quantity">{ingredient.quantityText}</span>{' '}
-            <span className="ingredient-name">{ingredientName}</span>
+            <span className={styles['ingredient-quantity']}>{ingredient.quantityText}</span>{' '}
+            <span className={styles['ingredient-name']}>{ingredientName}</span>
           </>
         ) : ingredient.quantity ? (
           <>
-            <span className="ingredient-quantity">{ingredient.quantity} {ingredient.unit}</span>{' '}
-            <span className="ingredient-name">{ingredientName}</span>
+            <span className={styles['ingredient-quantity']}>{ingredient.quantity} {ingredient.unit}</span>{' '}
+            <span className={styles['ingredient-name']}>{ingredientName}</span>
           </>
         ) : (
-          <span className="ingredient-name">{ingredientName}</span>
+          <span className={styles['ingredient-name']}>{ingredientName}</span>
         )}
-        {ingredient.note && <span className="ingredient-note"> ({ingredient.note})</span>}
+        {ingredient.note && <span className={styles['ingredient-note']}> ({ingredient.note})</span>}
       </li>
     );
   };
@@ -49,35 +50,35 @@ const RecipeDetail: React.FC<RecipeDetailProps> = ({ recipe, ingredients }) => {
     const divisor = perServing ? servings : 1;
 
     return (
-      <div className="nutrition-values">
+      <div className={styles['nutrition-values']}>
         {totals.calories !== undefined && totals.calories > 0 && (
-          <div className="nutrition-item">
-            <span className="nutrition-label">Calories:</span>
-            <span className="nutrition-value">{Math.round(totals.calories / divisor)} kcal</span>
+          <div className={styles['nutrition-item']}>
+            <span className={styles['nutrition-label']}>Calories:</span>
+            <span className={styles['nutrition-value']}>{Math.round(totals.calories / divisor)} kcal</span>
           </div>
         )}
         {totals.protein !== undefined && totals.protein > 0 && (
-          <div className="nutrition-item">
-            <span className="nutrition-label">Protein:</span>
-            <span className="nutrition-value">{(totals.protein / divisor).toFixed(1)} g</span>
+          <div className={styles['nutrition-item']}>
+            <span className={styles['nutrition-label']}>Protein:</span>
+            <span className={styles['nutrition-value']}>{(totals.protein / divisor).toFixed(1)} g</span>
           </div>
         )}
         {totals.carbohydrates !== undefined && totals.carbohydrates > 0 && (
-          <div className="nutrition-item">
-            <span className="nutrition-label">Carbs:</span>
-            <span className="nutrition-value">{(totals.carbohydrates / divisor).toFixed(1)} g</span>
+          <div className={styles['nutrition-item']}>
+            <span className={styles['nutrition-label']}>Carbs:</span>
+            <span className={styles['nutrition-value']}>{(totals.carbohydrates / divisor).toFixed(1)} g</span>
           </div>
         )}
         {totals.fat !== undefined && totals.fat > 0 && (
-          <div className="nutrition-item">
-            <span className="nutrition-label">Fat:</span>
-            <span className="nutrition-value">{(totals.fat / divisor).toFixed(1)} g</span>
+          <div className={styles['nutrition-item']}>
+            <span className={styles['nutrition-label']}>Fat:</span>
+            <span className={styles['nutrition-value']}>{(totals.fat / divisor).toFixed(1)} g</span>
           </div>
         )}
         {totals.fiber !== undefined && totals.fiber > 0 && (
-          <div className="nutrition-item">
-            <span className="nutrition-label">Fiber:</span>
-            <span className="nutrition-value">{(totals.fiber / divisor).toFixed(1)} g</span>
+          <div className={styles['nutrition-item']}>
+            <span className={styles['nutrition-label']}>Fiber:</span>
+            <span className={styles['nutrition-value']}>{(totals.fiber / divisor).toFixed(1)} g</span>
           </div>
         )}
       </div>
@@ -85,64 +86,64 @@ const RecipeDetail: React.FC<RecipeDetailProps> = ({ recipe, ingredients }) => {
   };
 
   return (
-    <div className="recipe-detail">
-      <div className="recipe-header">
+    <div className={styles['recipe-detail']}>
+      <div className={styles['recipe-header']}>
         <h1>{recipe.name}</h1>
-        <p className="recipe-description">{recipe.description}</p>
+        <p className={styles['recipe-description']}>{recipe.description}</p>
 
-        <div className="recipe-meta">
-          <span className="recipe-servings">Servings: {recipe.servings}</span>
+        <div className={styles['recipe-meta']}>
+          <span className={styles['recipe-servings']}>Servings: {recipe.servings}</span>
           {recipe.tags && recipe.tags.length > 0 && (
-            <div className="recipe-tags">
+            <div className={styles['recipe-tags']}>
               {recipe.tags.map((tag) => (
-                <span key={tag} className="tag">
+                <span key={tag} className={styles.tag}>
                   {tag}
                 </span>
               ))}
             </div>
           )}
           {recipe.categories && recipe.categories.length > 0 && (
-            <div className="recipe-categories">
+            <div className={styles['recipe-categories']}>
               {recipe.categories.map((category) => (
-                <span key={category} className="category">
+                <span key={category} className={styles.category}>
                   {category}
                 </span>
               ))}
             </div>
           )}
           {recipe.sourceUrl && (
-            <p className="source-url">
+            <p className={styles['source-url']}>
               Source: <a href={recipe.sourceUrl} target="_blank" rel="noopener noreferrer">{recipe.sourceUrl}</a>
             </p>
           )}
           {recipe.variantOf && (
-            <p className="variant-info">
+            <p className={styles['variant-info']}>
               <em>Variant of: {recipe.variantOf}</em>
             </p>
           )}
         </div>
       </div>
 
-      <div className="recipe-layout">
+      <div className={styles['recipe-layout']}>
         {recipe.ingredients && recipe.ingredients.length > 0 && (
-          <div className="recipe-ingredients-sidebar">
+          <div className={styles['recipe-ingredients-sidebar']}>
             <h2>Ingredients</h2>
             <ul>
               {recipe.ingredients.map(renderIngredient)}
             </ul>
 
             {nutritionSummary && (
-              <div className="nutrition-summary">
-                <div className="nutrition-header">
+              <div className={styles['nutrition-summary']}>
+                <div className={styles['nutrition-header']}>
                   <h3>{showPerServing ? 'Nutrition per serving' : 'Total nutrition'}</h3>
                   <button
-                    className="nutrition-toggle"
+                    className={styles['nutrition-toggle']}
                     onClick={() => setShowPerServing(!showPerServing)}
                   >
                     {showPerServing ? 'Show total' : 'Show per serving'}
                   </button>
                 </div>
-                <div className="nutrition-note">
+                <div className={styles['nutrition-note']}>
                   (based on {nutritionSummary.compatibleCount} of {nutritionSummary.totalCount} ingredients)
                 </div>
                 {renderNutrition(nutritionSummary.totals, showPerServing, recipe.servings)}
@@ -152,23 +153,23 @@ const RecipeDetail: React.FC<RecipeDetailProps> = ({ recipe, ingredients }) => {
         )}
 
         {recipe.steps && recipe.steps.length > 0 && (
-          <div className="recipe-instructions-main">
+          <div className={styles['recipe-instructions-main']}>
             <h2>Instructions</h2>
-            <div className="steps-container">
+            <div className={styles['steps-container']}>
               {recipe.steps.map((step, index) => (
-                <div key={index} className="instruction-step-box">
-                  <div className="step-number">{index + 1}</div>
-                  <div className="step-content">
-                    <p className="step-text">{step.text}</p>
+                <div key={index} className={styles['instruction-step-box']}>
+                  <div className={styles['step-number']}>{index + 1}</div>
+                  <div className={styles['step-content']}>
+                    <p className={styles['step-text']}>{step.text}</p>
                     {step.imageUrl && (
                       <img
                         src={step.imageUrl}
                         alt={`Step ${index + 1}`}
-                        className="step-image"
+                        className={styles['step-image']}
                       />
                     )}
                     {step.equipment && step.equipment.length > 0 && (
-                      <p className="equipment">Equipment: {step.equipment.join(', ')}</p>
+                      <p className={styles.equipment}>Equipment: {step.equipment.join(', ')}</p>
                     )}
                   </div>
                 </div>

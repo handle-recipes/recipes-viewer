@@ -2,6 +2,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { useFilteredData } from '../hooks/useFilteredData';
 import { useGroupFilter } from '../hooks/useGroupFilter';
 import { useEffect, useState } from 'react';
+import styles from './AppHeader.module.css';
 
 type HeaderProps = {
   showBackButton?: boolean;
@@ -56,39 +57,39 @@ function AppHeader({ showBackButton = false, backLabel = "Back to Recipes", onBa
   };
 
   const headerClasses = [
-    'app-header',
-    isScrolled ? 'scrolled' : '',
-    showBackButton ? 'has-back-button' : ''
+    styles['app-header'],
+    isScrolled ? styles.scrolled : '',
+    showBackButton ? styles['has-back-button'] : ''
   ].filter(Boolean).join(' ');
 
   return (
     <nav className={headerClasses}>
-      <div className="header-content">
-        <div className="header-left">
+      <div className={styles['header-content']}>
+        <div className={styles['header-left']}>
           {showBackButton && (
-            <button onClick={handleBackClick} className="back-button">
+            <button onClick={handleBackClick} className={styles['back-button']}>
               ← {backLabel}
             </button>
           )}
         </div>
 
-        <div className="header-center">
+        <div className={styles['header-center']}>
           {!showBackButton && (
-            <div className="tab-navigation">
+            <div className={styles['tab-navigation']}>
               <button
-                className={`tab-button ${activeTab === 'recipes' ? 'active' : ''}`}
+                className={`${styles['tab-button']} ${activeTab === 'recipes' ? styles.active : ''}`}
                 onClick={() => handleTabChange('recipes')}
               >
                 Recipes ({recipes.length})
               </button>
               <button
-                className={`tab-button ${activeTab === 'ingredients' ? 'active' : ''}`}
+                className={`${styles['tab-button']} ${activeTab === 'ingredients' ? styles.active : ''}`}
                 onClick={() => handleTabChange('ingredients')}
               >
                 Ingredients ({ingredients.length})
               </button>
               <button
-                className={`tab-button ${activeTab === 'suggestions' ? 'active' : ''}`}
+                className={`${styles['tab-button']} ${activeTab === 'suggestions' ? styles.active : ''}`}
                 onClick={() => handleTabChange('suggestions')}
               >
                 Suggestions ({suggestions.length})
@@ -97,18 +98,18 @@ function AppHeader({ showBackButton = false, backLabel = "Back to Recipes", onBa
           )}
         </div>
 
-        <div className="header-right">
+        <div className={styles['header-right']}>
           {!showBackButton && (
-            <div className="group-filter">
-              <label htmlFor="groupIdFilter" className="filter-label">
+            <div className={styles['group-filter']}>
+              <label htmlFor="groupIdFilter" className={styles['filter-label']}>
                 Filter by Group:
               </label>
-              <div className="filter-dropdown-group">
+              <div className={styles['filter-dropdown-group']}>
                 <select
                   id="groupIdFilter"
                   value={groupId}
                   onChange={(e) => setGroupId(e.target.value)}
-                  className="filter-dropdown"
+                  className={styles['filter-dropdown']}
                 >
                   <option value="">All Groups</option>
                   {allGroupIds.map((id) => (

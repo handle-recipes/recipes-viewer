@@ -1,0 +1,142 @@
+.ingredient-list {
+  width: 100%;
+}
+
+.ingredient-list h1 {
+  text-align: center;
+  margin-bottom: 2rem;
+  color: #333;
+}
+
+.ingredient-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+  padding: 0 20px;
+}
+
+.ingredient-card {
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  padding: 20px;
+  background: white;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.ingredient-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 16px rgba(0,0,0,0.12);
+  border-color: #3498db;
+}
+
+.ingredient-card h3 {
+  margin: 0;
+  color: #2c3e50;
+  font-size: 1.3rem;
+  font-weight: 600;
+  text-transform: capitalize;
+  padding-bottom: 8px;
+  border-bottom: 2px solid #f0f0f0;
+}
+
+.aliases {
+  margin: 0;
+  font-size: 0.85rem;
+  color: #7f8c8d;
+  line-height: 1.5;
+}
+
+.aliases strong {
+  color: #5d6d7e;
+  font-weight: 600;
+}
+
+.categories {
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.category-tag {
+  background: #e8f4f8;
+  color: #2980b9;
+  padding: 5px 10px;
+  border-radius: 16px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  border: 1px solid #d4e9f2;
+}
+
+.allergens {
+  margin: 0;
+  padding: 10px 12px;
+  background: #fff8e1;
+  border-left: 4px solid #ffa726;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  color: #ef6c00;
+}
+
+.allergens strong {
+  font-weight: 600;
+  color: #e65100;
+}
+
+.nutrition {
+  margin: 0;
+  padding: 10px 12px;
+  background: #f1f8e9;
+  border-left: 4px solid #66bb6a;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  color: #2e7d32;
+  line-height: 1.6;
+}
+
+.nutrition strong {
+  font-weight: 600;
+  color: #1b5e20;
+  display: block;
+  margin-bottom: 4px;
+}
+
+.nutrition span {
+  color: #388e3c;
+}
+
+.variant-info {
+  margin: 0;
+  padding: 8px 12px;
+  background: #f3e5f5;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  color: #6a1b9a;
+  font-style: italic;
+}
+
+@media (max-width: 768px) {
+  .ingredient-grid {
+    grid-template-columns: 1fr;
+    padding: 0 10px;
+  }
+
+  .ingredient-card {
+    padding: 16px;
+  }
+
+  .ingredient-card h3 {
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .ingredient-list h1 {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+}
