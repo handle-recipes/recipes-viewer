@@ -4,139 +4,133 @@
 
 .ingredient-list h1 {
   text-align: center;
-  margin-bottom: 2rem;
-  color: #333;
+  margin-bottom: 1rem;
+  color: #800000;
+  font-size: 1.8rem;
+  text-shadow: 2px 2px 0px #FFCC00;
+  font-family: 'Comic Neue', 'Comic Sans MS', cursive;
 }
 
 .ingredient-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 20px;
-  padding: 0 20px;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 12px;
+  padding: 0;
 }
 
 .ingredient-card {
-  border: 1px solid #e0e0e0;
-  border-radius: 12px;
-  padding: 20px;
-  background: white;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-  transition: all 0.3s ease;
+  border: 2px outset #c0c0c0;
+  padding: 12px;
+  background: #FFFFFF;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 8px;
 }
 
 .ingredient-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 16px rgba(0,0,0,0.12);
-  border-color: #3498db;
+  background: #FFFFCC;
+  border-color: #FF0000;
 }
 
 .ingredient-card h3 {
   margin: 0;
-  color: #2c3e50;
-  font-size: 1.3rem;
-  font-weight: 600;
+  color: #000080;
+  font-size: 1.1rem;
+  font-weight: 700;
   text-transform: capitalize;
-  padding-bottom: 8px;
-  border-bottom: 2px solid #f0f0f0;
+  padding-bottom: 6px;
+  border-bottom: 2px groove #c0c0c0;
+  font-family: 'Comic Neue', 'Comic Sans MS', cursive;
+}
+
+.ingredient-card h3::before {
+  content: "* ";
+  color: #FF0000;
 }
 
 .aliases {
   margin: 0;
-  font-size: 0.85rem;
-  color: #7f8c8d;
-  line-height: 1.5;
+  font-size: 0.8rem;
+  color: #666;
+  line-height: 1.4;
 }
 
 .aliases strong {
-  color: #5d6d7e;
-  font-weight: 600;
+  color: #000080;
+  font-weight: 700;
 }
 
 .categories {
   margin: 0;
   display: flex;
   flex-wrap: wrap;
-  gap: 6px;
+  gap: 4px;
 }
 
 .category-tag {
-  background: #e8f4f8;
-  color: #2980b9;
-  padding: 5px 10px;
-  border-radius: 16px;
-  font-size: 0.8rem;
-  font-weight: 500;
-  border: 1px solid #d4e9f2;
+  background: #6699CC;
+  color: #FFFFFF;
+  padding: 1px 8px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  border: 1px outset #6699CC;
 }
 
 .allergens {
   margin: 0;
-  padding: 10px 12px;
-  background: #fff8e1;
-  border-left: 4px solid #ffa726;
-  border-radius: 4px;
-  font-size: 0.9rem;
-  color: #ef6c00;
+  padding: 6px 8px;
+  background: #FFCCCC;
+  border: 1px solid #FF0000;
+  font-size: 0.85rem;
+  color: #CC0000;
 }
 
 .allergens strong {
-  font-weight: 600;
-  color: #e65100;
+  font-weight: 700;
+  color: #990000;
 }
 
 .nutrition {
   margin: 0;
-  padding: 10px 12px;
-  background: #f1f8e9;
-  border-left: 4px solid #66bb6a;
-  border-radius: 4px;
-  font-size: 0.85rem;
-  color: #2e7d32;
-  line-height: 1.6;
+  padding: 6px 8px;
+  background: #CCFFCC;
+  border: 1px solid #009900;
+  font-size: 0.8rem;
+  color: #006600;
+  line-height: 1.5;
 }
 
 .nutrition strong {
-  font-weight: 600;
-  color: #1b5e20;
+  font-weight: 700;
+  color: #004400;
   display: block;
-  margin-bottom: 4px;
+  margin-bottom: 2px;
 }
 
 .nutrition span {
-  color: #388e3c;
+  color: #006600;
 }
 
 .variant-info {
   margin: 0;
-  padding: 8px 12px;
-  background: #f3e5f5;
-  border-radius: 4px;
-  font-size: 0.85rem;
-  color: #6a1b9a;
+  padding: 4px 8px;
+  background: #FFCCFF;
+  border: 1px dashed #800080;
+  font-size: 0.8rem;
+  color: #800080;
   font-style: italic;
 }
 
 @media (max-width: 768px) {
   .ingredient-grid {
     grid-template-columns: 1fr;
-    padding: 0 10px;
   }
 
   .ingredient-card {
-    padding: 16px;
+    padding: 10px;
   }
 
   .ingredient-card h3 {
-    font-size: 1.1rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .ingredient-list h1 {
-    font-size: 1.5rem;
-    margin-bottom: 1.5rem;
+    font-size: 1rem;
   }
 }

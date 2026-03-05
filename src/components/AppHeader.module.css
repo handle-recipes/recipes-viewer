@@ -2,11 +2,9 @@
   position: sticky;
   top: 0;
   z-index: 100;
-  padding: 12px 0;
-  background-color: #f8f9fa;
-  transition: padding 0.25s ease;
-  border: none;
-  box-shadow: none;
+  padding: 0;
+  background: linear-gradient(180deg, #000080 0%, #0000CC 50%, #000080 100%);
+  border-bottom: 3px ridge #c0c0c0;
 }
 
 .app-header::after {
@@ -14,38 +12,35 @@
   position: absolute;
   left: 0;
   right: 0;
-  bottom: 0;
-  height: 1px;
-  background-color: #ddd;
-  transition: background-color 0.25s ease;
+  bottom: -6px;
+  height: 3px;
+  background: linear-gradient(90deg, #FF0000, #FF8800, #FFFF00, #00FF00, #0000FF, #8800FF);
 }
 
 .scrolled {
-  padding: 6px 0;
+  padding: 0;
 }
 
 .scrolled::after {
-  background-color: #bbb;
+  background: linear-gradient(90deg, #FF0000, #FF8800, #FFFF00, #00FF00, #0000FF, #8800FF);
 }
 
 .header-content {
-  max-width: 1000px;
+  max-width: 900px;
   margin: 0 auto;
-  padding: 0 20px;
+  padding: 8px 15px;
   display: grid;
   grid-template-columns: 1fr auto 1fr;
   align-items: center;
-  gap: 20px;
-  transition: all 0.25s ease;
+  gap: 10px;
 }
 
 .scrolled .header-content {
-  gap: 12px;
+  gap: 8px;
   grid-template-columns: auto;
   justify-content: center;
 }
 
-/* Keep back button left-aligned when scrolled */
 .scrolled.has-back-button .header-content {
   grid-template-columns: auto 1fr;
   justify-content: flex-start;
@@ -60,7 +55,6 @@
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  transition: all 0.25s ease;
 }
 
 .header-center {
@@ -73,7 +67,6 @@
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  transition: all 0.25s ease;
 }
 
 .scrolled .header-right {
@@ -83,20 +76,20 @@
 .group-filter {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 8px;
   flex-shrink: 0;
 }
 
 .filter-label {
-  font-size: 0.9rem;
-  font-weight: 500;
-  color: #666;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #FFFF00;
   white-space: nowrap;
-  transition: all 0.3s ease;
+  text-shadow: 1px 1px 0px #000;
 }
 
 .scrolled .filter-label {
-  font-size: 0.85rem;
+  font-size: 0.8rem;
 }
 
 .filter-dropdown-group {
@@ -106,113 +99,111 @@
 }
 
 .filter-dropdown {
-  padding: 8px 12px;
-  border: 1px solid #ddd;
-  border-radius: 6px;
-  font-size: 0.9rem;
+  padding: 3px 6px;
+  border: 2px inset #c0c0c0;
+  border-radius: 0;
+  font-size: 0.85rem;
   width: auto;
-  min-width: 150px;
-  background: white;
+  min-width: 130px;
+  background: #fff;
   cursor: pointer;
-  transition: all 0.3s ease;
-  appearance: none;
-  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6,9 12,15 18,9'%3e%3c/polyline%3e%3c/svg%3e");
-  background-repeat: no-repeat;
-  background-position: right 12px center;
-  background-size: 12px;
-  padding-right: 36px;
+  font-family: 'Comic Neue', 'Comic Sans MS', cursive, sans-serif;
 }
 
 .scrolled .filter-dropdown {
-  padding: 6px 10px;
-  font-size: 0.85rem;
-  padding-right: 32px;
+  padding: 2px 4px;
+  font-size: 0.8rem;
 }
 
 .filter-dropdown:focus {
-  outline: none;
-  border-color: #3498db;
-  box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.1);
+  outline: 1px dotted #FFFF00;
 }
 
 .filter-dropdown:hover {
-  border-color: #bbb;
+  background: #FFFFCC;
 }
 
 .tab-navigation {
   display: flex;
   justify-content: center;
+  gap: 2px;
 }
 
 .tab-button {
-  background: none;
-  border: none;
-  padding: 10px 20px;
-  margin: 0 4px;
+  background: linear-gradient(180deg, #6699CC 0%, #336699 100%);
+  border: 2px outset #6699CC;
+  padding: 6px 16px;
+  margin: 0;
   cursor: pointer;
-  font-size: 0.95rem;
-  color: #666;
-  border-bottom: 3px solid transparent;
-  transition: all 0.25s ease;
+  font-size: 0.9rem;
+  color: #FFFFFF;
+  font-weight: 700;
+  text-shadow: 1px 1px 0px #003366;
+  font-family: 'Comic Neue', 'Comic Sans MS', cursive, sans-serif;
+  border-radius: 0;
 }
 
 .scrolled .tab-button {
-  padding: 6px 14px;
-  font-size: 0.85rem;
-  border-bottom-width: 2px;
+  padding: 4px 12px;
+  font-size: 0.8rem;
 }
 
 .tab-button:hover {
-  color: #007bff;
-  background-color: #f8f9fa;
+  background: linear-gradient(180deg, #88BBEE 0%, #4488BB 100%);
+  color: #FFFF00;
 }
 
 .active {
-  color: #007bff;
-  border-bottom-color: #007bff;
-  font-weight: 600;
+  background: linear-gradient(180deg, #FFCC00 0%, #FF9900 100%);
+  color: #000;
+  border-style: inset;
+  text-shadow: none;
+}
+
+.active:hover {
+  background: linear-gradient(180deg, #FFDD33 0%, #FFAA22 100%);
+  color: #000;
 }
 
 .back-button {
   all: unset;
-  background: #3498db;
-  border: none;
-  padding: 10px 16px;
-  border-radius: 6px;
+  background: linear-gradient(180deg, #f0f0f0 0%, #c0c0c0 100%);
+  border: 2px outset #c0c0c0;
+  padding: 4px 12px;
   cursor: pointer;
-  font-size: 0.9rem;
-  color: white;
-  transition: all 0.25s ease;
+  font-size: 0.85rem;
+  color: #000080;
+  font-weight: 700;
+  font-family: 'Comic Neue', 'Comic Sans MS', cursive, sans-serif;
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  font-weight: 500;
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  box-shadow: 0 2px 4px rgba(52, 152, 219, 0.2);
+  gap: 4px;
   text-decoration: none;
 }
 
 .scrolled .back-button {
-  padding: 8px 14px;
-  font-size: 0.85rem;
+  padding: 3px 10px;
+  font-size: 0.8rem;
 }
 
 .back-button:hover {
-  background: #2980b9;
-  box-shadow: 0 4px 8px rgba(52, 152, 219, 0.3);
-  transform: translateY(-1px);
+  background: linear-gradient(180deg, #e0e0e0 0%, #b0b0b0 100%);
+  color: #FF0000;
+}
+
+.back-button:active {
+  border-style: inset;
 }
 
 .back-button:focus,
 .back-button:focus-visible {
-  outline: 2px solid #2980b9;
-  outline-offset: 2px;
+  outline: 1px dotted #FFFF00;
 }
 
 @media (max-width: 768px) {
   .header-content {
     grid-template-columns: 1fr;
-    gap: 12px;
+    gap: 8px;
   }
 
   .has-back-button .header-content,
@@ -234,41 +225,16 @@
 
   .filter-dropdown {
     width: 100%;
-    max-width: 300px;
+    max-width: 200px;
   }
 
   .tab-button {
-    padding: 10px 16px;
-    font-size: 0.9rem;
+    padding: 6px 10px;
+    font-size: 0.8rem;
   }
 
   .back-button {
-    padding: 10px 16px;
-    font-size: 0.9rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .app-header {
-    padding: 15px 0;
-  }
-
-  .header-content {
-    padding: 0 10px;
-  }
-
-  .tab-button {
-    padding: 8px 12px;
-    font-size: 0.85rem;
-    margin: 0 2px;
-  }
-
-  .filter-label {
-    font-size: 0.85rem;
-  }
-
-  .filter-dropdown {
-    font-size: 0.85rem;
-    padding: 6px 10px;
+    padding: 4px 10px;
+    font-size: 0.8rem;
   }
 }

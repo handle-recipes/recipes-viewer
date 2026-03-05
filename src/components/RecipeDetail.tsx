@@ -1,7 +1,23 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useCallback } from 'react';
 import { Recipe, RecipeIngredient, Ingredient, NutritionalInfo } from '../types';
 import { calculateRecipeNutrition } from '../utils/nutritionCalculator';
 import styles from './RecipeDetail.module.css';
+
+function getStorageKey(recipeId: string) {
+  return `recipe-steps-${recipeId}`;
+}
+
+function loadCheckedSteps(recipeId: string): Set<number> {
+  try {
+    const raw = localStorage.getItem(getStorageKey(recipeId));
+    if (raw) return new Set(JSON.parse(raw));
+  } catch { /* ignore */ }
+  return new Set();
+}
+
+function saveCheckedSteps(recipeId: string, steps: Set<number>) {
+  localStorage.setItem(getStorageKey(recipeId), JSON.stringify([...steps]));
+}
 
 interface RecipeDetailProps {
   recipe: Recipe;
@@ -10,6 +26,17 @@ interface RecipeDetailProps {
 
 const RecipeDetail: React.FC<RecipeDetailProps> = ({ recipe, ingredients }) => {
   const [showPerServing, setShowPerServing] = useState(false);
+  const [checkedSteps, setCheckedSteps] = useState<Set<number>>(() => loadCheckedSteps(recipe.id));
+
+  const toggleStep = useCallback((index: number) => {
+    setCheckedSteps(prev => {
+      const next = new Set(prev);
+      if (next.has(index)) next.delete(index);
+      else next.add(index);
+      saveCheckedSteps(recipe.id, next);
+      return next;
+    });
+  }, [recipe.id]);
 
   // Create a map of ingredients for quick lookup
   const ingredientsMap = useMemo(() => {
@@ -157,8 +184,14 @@ const RecipeDetail: React.FC<RecipeDetailProps> = ({ recipe, ingredients }) => {
             <h2>Instructions</h2>
             <div className={styles['steps-container']}>
               {recipe.steps.map((step, index) => (
-                <div key={index} className={styles['instruction-step-box']}>
-                  <div className={styles['step-number']}>{index + 1}</div>
+                <div
+                  key={index}
+                  className={`${styles['instruction-step-box']} ${checkedSteps.has(index) ? styles['step-checked'] : ''}`}
+                  onClick={() => toggleStep(index)}
+                >
+                  <div className={styles['step-number']}>
+                    {checkedSteps.has(index) ? '\u2714' : index + 1}
+                  </div>
                   <div className={styles['step-content']}>
                     <p className={styles['step-text']}>{step.text}</p>
                     {step.imageUrl && (
